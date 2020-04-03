@@ -68,15 +68,14 @@
           [ 'OS=="mac"', {
             'link_settings': {
               'libraries': [
-                '<(QT_LIB_PATH)/libQt5Network.a',
-                '<(QT_LIB_PATH)/libQt5Gui.a',
-                '<(QT_LIB_PATH)/libQt5Core.a',
-                '<(QT_LIB_PATH)/libQt5Widgets.a',
-                '<(QT_LIB_PATH)/libQt5Qml.a',
-                '<(QT_LIB_PATH)/libQt5Quick.a',
-                '<(QT_LIB_PATH)/libQt5MultimediaWidgets.a',
-                '<(QT_LIB_PATH)/libQt5Multimedia.a',
-                '<(QT_LIB_PATH)/libQt5Xml.a',
+                '-L<(QT_LIB_PATH)',
+                '<(QT_LIB_PATH)/QtGui.framework',
+                '<(QT_LIB_PATH)/QtCore.framework',
+                '<(QT_LIB_PATH)/QtNetwork.framework',
+                '<(QT_LIB_PATH)/QtWidgets.framework',
+                '<(QT_LIB_PATH)/QtQuick.framework',
+                '<(QT_LIB_PATH)/QtQml.framework',
+                '<(QT_LIB_PATH)/QtXml.framework',
                 '$(SDKROOT)/System/Library/Frameworks/Foundation.framework',
                 '$(SDKROOT)/System/Library/Frameworks/CoreFoundation.framework',
                 '$(SDKROOT)/System/Library/Frameworks/ApplicationServices.framework',
@@ -276,94 +275,6 @@
           ],
         } ]
       ],
-    }, {
-      'target_name': 'test_WD_hybrid',
-      'type': 'executable',
-
-      'product_name': 'WebDriver',
-
-      'dependencies': [
-        'base.gyp:chromium_base',
-        'wd_core.gyp:WebDriver_core',
-        'wd_ext_qt.gyp:WebDriver_extension_qt_base',
-        'wd_ext_qt.gyp:WebDriver_extension_qt_web',
-        'test_widgets',
-      ],
-
-      'defines': [ 'WD_ENABLE_WEB_VIEW=1' ],
-
-      'sources': [
-        'src/Test/main.cc',
-        'src/Test/WindowWithEmbeddedViewTest.cc',
-        'src/Test/WindowWithEmbeddedViewTest.h',
-        '<(INTERMEDIATE_DIR)/moc_WindowWithEmbeddedViewTest.cc',
-        'src/Test/WidgetAndWebViewTest.cc',
-        'src/Test/WidgetAndWebViewTest.h',
-        '<(INTERMEDIATE_DIR)/moc_WidgetAndWebViewTest.cc',
-        'src/Test/GraphicsWebViewTest.cc',
-        'src/Test/GraphicsWebViewTest.h',
-        '<(INTERMEDIATE_DIR)/moc_GraphicsWebViewTest.cc',
-      ],
-
-      'conditions': [
-        ['<(WD_CONFIG_QUICK) == 1', {
-          'dependencies': ['wd_ext_qt.gyp:WebDriver_extension_qt_quick', 'wd_ext_qt.gyp:WebDriver_extension_qt_quick_web'],
-
-          'conditions': [
-            [ 'OS == "linux"', {
-              'dependencies': ['wd_ext_qt.gyp:WebDriver_extension_qt_quick_shared'],
-            } ],
-          ],
-        }, {
-          'defines': [
-             'QT_NO_QML',
-           ],
-        } ],
-
-      	[ '<(WD_BUILD_MONGOOSE) == 0', {
-          'sources': [
-            'src/third_party/mongoose/mongoose.c',
-          ],
-        } ],
-
-        [ '<(QT5) == 1', {
-          'conditions': [
-            ['OS=="linux"', {
-              'libraries': ['-lQt5WebKitWidgets', '-lQt5WebKit',],
-            } ],
-            [ 'OS=="win"', {
-              'libraries': ['-l<(QT_LIB_PATH)/Qt5WebKit', '-l<(QT_LIB_PATH)/Qt5WebKitWidgets'],
-            } ],
-            [ 'OS=="mac"', {
-              'link_settings': {
-                'libraries': ['<(QT_LIB_PATH)/libQt5WebKit.a','<(QT_LIB_PATH)/libQt5WebKitWidgets.a',],
-              },
-            } ],
-          ],
-        }, {
-          # else QT4
-          'sources' : [
-            'src/Test/WindowWithSeparatedDeclarativeAndWebViewsTest.cc',
-            'src/Test/WindowWithSeparatedDeclarativeAndWebViewsTest.h',
-            '<(INTERMEDIATE_DIR)/moc_WindowWithSeparatedDeclarativeAndWebViewsTest.cc',
-          ],
-
-          'conditions': [
-            ['OS=="linux"', {
-              'libraries': ['-lQtWebKit',],
-            } ],
-            [ 'OS=="win"', {
-              'libraries': ['-l<(QT_LIB_PATH)/QtWebKit4',],
-            } ],
-            [ 'OS=="mac"', {
-              'link_settings': {
-                'libraries': ['<(QT_LIB_PATH)/QtWebKit.framework',],
-              },
-            } ],
-          ],
-        } ],
-      ],
-
     }, {
       'target_name': 'test_WD_hybrid_noWebkit',
       'type': 'executable',

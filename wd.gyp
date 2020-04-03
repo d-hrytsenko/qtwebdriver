@@ -37,32 +37,11 @@
           ],
         } ],
 
-        ['<(WD_CONFIG_WEBKIT) == 1', {
-          'dependencies': ['wd_ext_qt.gyp:WebDriver_extension_qt_web'],
-
-          'conditions': [
-            [ 'OS == "linux"', { 
-              'dependencies': ['wd_ext_qt.gyp:WebDriver_extension_qt_web_shared'],
-            } ],
-          ],
-        } ],
-
         [ 'OS == "linux"', {
           'dependencies': [
             'base.gyp:chromium_base_shared',
             'wd_core.gyp:WebDriver_core_shared',
           ],
-        } ],
-
-        ['platform == "desktop"', {
-          'dependencies': [
-            'wd_test.gyp:test_WD_hybrid_noWebkit',
-          ],
-          'conditions': [
-            ['<(WD_CONFIG_WEBKIT) == 1', {
-              'dependencies': ['wd_test.gyp:test_WD_hybrid']
-            } ],
-          ]
         } ],
 
         ['platform == "desktop" and OS == "linux"', {

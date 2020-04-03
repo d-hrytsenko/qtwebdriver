@@ -68,35 +68,6 @@
       ], # conditions
 
     }, {
-      'target_name': 'WebDriver_extension_qt_web',
-      'type': 'static_library',
-      'standalone_static_library': 1,
-
-      'sources': [
-        'src/webdriver/extension_qt/web_view_creator.cc',
-        'src/webdriver/extension_qt/web_view_executor.cc',
-        'src/webdriver/extension_qt/web_view_enumerator.cc',
-        'src/webdriver/extension_qt/web_view_visualizer.h',
-        'src/webdriver/extension_qt/web_view_visualizer.cc',
-        'src/webdriver/extension_qt/qwebviewext.cc',
-        'src/webdriver/extension_qt/web_view_util.cc',
-        'src/webdriver/extension_qt/web_view_util.h',
-        'src/webdriver/extension_qt/qwebkit_proxy.cc',
-        'src/webdriver/extension_qt/qwebkit_proxy.h',
-        'inc/extension_qt/qnetwork_access_manager_tracer.h',
-        'src/webdriver/extension_qt/qnetwork_access_manager_tracer.cc',
-        'src/webdriver/extension_qt/graphics_web_view_handle.cc',
-        'src/webdriver/extension_qt/graphics_web_view_enumerator.cc',
-        'src/webdriver/extension_qt/graphics_web_view_executor.cc',
-        'inc/extension_qt/qwebviewext.h',
-        '<(INTERMEDIATE_DIR)/moc_web_view_visualizer.cc',
-        '<(INTERMEDIATE_DIR)/moc_qwebviewext.cc',
-        '<(INTERMEDIATE_DIR)/moc_qwebkit_proxy.cc',
-        '<(INTERMEDIATE_DIR)/moc_qnetwork_access_manager_tracer.cc',
-        'src/third_party/webdriver/atoms.cc',
-      ],
-
-    } , {
       'target_name': 'WebDriver_extension_qt_quick',
       'type': 'static_library',
       'standalone_static_library': 1,
@@ -132,32 +103,6 @@
       ], # conditions
 
     } , {
-      'target_name': 'WebDriver_extension_qt_quick_web',
-      'type': 'static_library',
-      'standalone_static_library': 1,
-
-      'conditions': [
-      
-        ['<(QT5) == 1', {
-
-          'sources': [
-            # TODO: Quick2 support
-            'src/webdriver/dummy.cc',
-          ],
-        } , {
-
-          'sources': [
-            'src/webdriver/extension_qt/declarative_item_view_handle.cc',
-            'src/webdriver/extension_qt/qdeclarativewebview.cc',
-            'src/webdriver/extension_qt/qml_web_view_enumerator.cc',
-            'src/webdriver/extension_qt/qml_web_view_executor.cc',
-            'inc/extension_qt/qdeclarativewebview.h',
-            '<(INTERMEDIATE_DIR)/moc_qdeclarativewebview.cc',
-          ],
-        } ],
-
-      ], # conditions
-    } , {
       'target_name': 'WebDriver_extension_qt_base_shared',
       'type': 'shared_library',
 
@@ -167,15 +112,6 @@
         'WebDriver_extension_qt_base',
       ],
     } , {
-      'target_name': 'WebDriver_extension_qt_web_shared',
-      'type': 'shared_library',
-
-      'product_name': 'WebDriver_extension_qt_web',
-
-      'dependencies': [
-        'WebDriver_extension_qt_web',
-      ],
-    } , {
       'target_name': 'WebDriver_extension_qt_quick_shared',
       'type': 'shared_library',
 
@@ -183,15 +119,6 @@
 
       'dependencies': [
         'WebDriver_extension_qt_quick',
-      ],
-    } , {
-      'target_name': 'WebDriver_extension_qt_quick_web_shared',
-      'type': 'shared_library',
-
-      'product_name': 'WebDriver_extension_qt_quick_web',
-
-      'dependencies': [
-        'WebDriver_extension_qt_quick_web',
       ],
     }
   ],
