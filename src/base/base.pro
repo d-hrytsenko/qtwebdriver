@@ -3,7 +3,7 @@ include($$BUILD_DIR/common.pri)
 
 TARGET = chromium_base
 TEMPLATE = lib
-CONFIG += staticlib create_prl
+CONFIG += staticlib
 
 include(base-src.pri)
 

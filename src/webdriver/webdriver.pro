@@ -3,7 +3,7 @@ include($$BUILD_DIR/common.pri)
 
 TARGET = WebDriver_core
 TEMPLATE = lib
-CONFIG += staticlib create_prl
+CONFIG += staticlib
 
 version.target = $$SRC_DIR/webdriver/webdriver_version.cc
 version.depends = FORCE
